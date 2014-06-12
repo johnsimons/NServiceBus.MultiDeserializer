@@ -21,7 +21,7 @@ namespace JsonEndpoint
         {
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
-                Bus.Send(new Messages.Customer { Name = "json" });
+                Bus.Send(new Messages.MyName { Name = "json" });
             }
         }
 

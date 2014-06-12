@@ -7,11 +7,15 @@ using NServiceBus;
 
 namespace MyServer
 {
-    public class SayHello : IHandleMessages<Customer>
+    public class SayHello : IHandleMessages<MyName>
     {
-        public void Handle(Customer message)
+        public IBus Bus { get; set; }
+
+        public void Handle(MyName message)
         {
             Console.Out.WriteLine("Hello from {0}", message.Name);
+
+            Bus.Reply(new Thankyou());
         }
     }
 }

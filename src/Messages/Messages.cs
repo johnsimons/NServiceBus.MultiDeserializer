@@ -7,8 +7,13 @@ using NServiceBus;
 namespace Messages
 {
     [Serializable]
-    public class Customer : ICommand
+    public class MyName : ICommand
     {
         public string Name { get; set; }
+    }
+
+    [Serializable]
+    public class Thankyou : IMessage
+    {
     }
 }

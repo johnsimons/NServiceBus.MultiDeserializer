@@ -21,7 +21,7 @@ namespace BsonEndpoint
         {
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
-                Bus.Send(new Messages.Customer { Name = "bson" });
+                Bus.Send(new Messages.MyName { Name = "bson" });
             }
         }
 

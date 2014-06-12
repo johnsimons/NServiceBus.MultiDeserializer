@@ -21,7 +21,7 @@ namespace BinaryEndpoint
         {
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
-                Bus.Send(new Messages.Customer { Name = "binary" });
+                Bus.Send(new Messages.MyName { Name = "binary" });
             }
         }
 
