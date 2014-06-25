@@ -9,5 +9,8 @@ namespace MyServer
 	*/
 	public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
+	    public void Customize(ConfigurationBuilder builder)
+	    {
+	    }
     }
 }

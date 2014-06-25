@@ -6,7 +6,7 @@ namespace NServiceBus.MultiDeserializer
     {
         public void Init(Configure config)
         {
-            config.Pipeline.Replace(WellKnownBehavior.ExtractLogicalMessages, typeof(MultiDeserializer), "Deserializes messages based on the content type header");
+            config.Pipeline.Replace(WellKnownBehavior.DeserializeMessages, typeof(MultiDeserializer), "Deserializes messages based on the content type header");
         }
     }
 }

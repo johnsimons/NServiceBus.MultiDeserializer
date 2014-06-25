@@ -5,14 +5,20 @@ namespace BinaryEndpoint
 {
     using NServiceBus;
 
-	public class EndpointConfig : IConfigureThisEndpoint, AsA_Server, IWantCustomInitialization
+	public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
-	    public Configure Init()
-	    {
-	        return Configure.With().UseSerialization<Binary>();
-	    }
+	    public void Customize(ConfigurationBuilder builder)
+        { }
     }
 
+    class SetSerializer : INeedInitialization
+    {
+        public void Init(Configure config)
+        {
+            config.UseSerialization<Binary>();
+        }
+    }
+        
     class Sender : IWantToRunWhenBusStartsAndStops
     {
         public IBus Bus { get; set; }

@@ -5,11 +5,17 @@ namespace JsonEndpoint
 {
     using NServiceBus;
 
-    public class EndpointConfig : IConfigureThisEndpoint, AsA_Server, IWantCustomInitialization
+    public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
-        public Configure Init()
+        public void Customize(ConfigurationBuilder builder)
+        { }
+    }
+
+    class SetSerializer : INeedInitialization
+    {
+        public void Init(Configure config)
         {
-            return Configure.With().UseSerialization<Json>();
+            config.UseSerialization<Json>();
         }
     }
 

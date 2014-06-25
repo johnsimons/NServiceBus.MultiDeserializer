@@ -5,11 +5,19 @@ namespace BsonEndpoint
 {
     using NServiceBus;
 
-    public class EndpointConfig : IConfigureThisEndpoint, AsA_Server, IWantCustomInitialization
+    public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
-        public Configure Init()
+        public void Customize(ConfigurationBuilder builder)
         {
-            return Configure.With().UseSerialization<Bson>();
+
+        }
+    }
+
+    class SetSerializer : INeedInitialization
+    {
+        public void Init(Configure config)
+        {
+            config.UseSerialization<Bson>();
         }
     }
 
