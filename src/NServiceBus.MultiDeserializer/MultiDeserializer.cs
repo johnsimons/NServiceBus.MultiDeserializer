@@ -23,7 +23,8 @@ namespace NServiceBus.MultiDeserializer
         private readonly Dictionary<string, IMessageSerializer> serializers =
             new Dictionary<string, IMessageSerializer>();
 
-        public MultiDeserializer(Conventions conventions, IMessageSerializer defaultSerializer, IMessageMapper mapper,
+        public MultiDeserializer(Configure config, Conventions conventions, IMessageSerializer defaultSerializer,
+            IMessageMapper mapper,
             LogicalMessageFactory logicalMessageFactory, MessageMetadataRegistry metadataRegistry)
         {
             _defaultSerializer = defaultSerializer;
@@ -40,6 +41,9 @@ namespace NServiceBus.MultiDeserializer
             serializers.Add(binary.ContentType, binary);
 
             var xml = new XmlMessageSerializer(mapper, conventions);
+            List<Type> messageTypes = config.TypesToScan.Where(conventions.IsMessageType).ToList();
+
+            xml.Initialize(messageTypes);
             serializers.Add(xml.ContentType, xml);
 
             if (!serializers.ContainsKey(_defaultSerializer.ContentType))
@@ -52,11 +56,11 @@ namespace NServiceBus.MultiDeserializer
         {
             TransportMessage transportMessage = context.PhysicalMessage;
 
-            if (IsControlMessage(transportMessage))
-            {
-                next();
-                return;
-            }
+            //if (IsControlMessage(transportMessage))
+            //{
+            //    next();
+            //    return;
+            //}
 
             string contentType = _defaultSerializer.ContentType;
 

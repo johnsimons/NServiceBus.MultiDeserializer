@@ -1,17 +1,17 @@
-
 using System;
+using Messages;
+using NServiceBus;
 
 namespace JsonEndpoint
 {
-    using NServiceBus;
-
     public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
         public void Customize(ConfigurationBuilder builder)
-        { }
+        {
+        }
     }
 
-    class SetSerializer : INeedInitialization
+    internal class SetSerializer : INeedInitialization
     {
         public void Init(Configure config)
         {
@@ -19,7 +19,7 @@ namespace JsonEndpoint
         }
     }
 
-    class Sender : IWantToRunWhenBusStartsAndStops
+    internal class Sender : IWantToRunWhenBusStartsAndStops
     {
         public IBus Bus { get; set; }
 
@@ -27,7 +27,7 @@ namespace JsonEndpoint
         {
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
-                Bus.Send(new Messages.MyName { Name = "json" });
+                Bus.Send(new MyRequest {ContentType = "json"});
             }
         }
 

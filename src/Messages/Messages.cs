@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NServiceBus;
 
 namespace Messages
 {
     [Serializable]
-    public class MyName : ICommand
+    public class MyRequest : ICommand
     {
-        public string Name { get; set; }
+        public string ContentType { get; set; }
     }
 
     [Serializable]
-    public class Thankyou : IMessage
+    public class MyResponse : IMessage
     {
+        public string Message { get; set; }
     }
 }

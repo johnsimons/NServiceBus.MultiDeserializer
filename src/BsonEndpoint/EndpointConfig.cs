@@ -1,19 +1,17 @@
-
 using System;
+using Messages;
+using NServiceBus;
 
 namespace BsonEndpoint
 {
-    using NServiceBus;
-
     public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
         public void Customize(ConfigurationBuilder builder)
         {
-
         }
     }
 
-    class SetSerializer : INeedInitialization
+    internal class SetSerializer : INeedInitialization
     {
         public void Init(Configure config)
         {
@@ -21,7 +19,7 @@ namespace BsonEndpoint
         }
     }
 
-    class Sender : IWantToRunWhenBusStartsAndStops
+    internal class Sender : IWantToRunWhenBusStartsAndStops
     {
         public IBus Bus { get; set; }
 
@@ -29,7 +27,7 @@ namespace BsonEndpoint
         {
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
-                Bus.Send(new Messages.MyName { Name = "bson" });
+                Bus.Send(new MyRequest {ContentType = "bson"});
             }
         }
 

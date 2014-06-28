@@ -1,25 +1,26 @@
-
 using System;
+using Messages;
+using NServiceBus;
 
 namespace BinaryEndpoint
 {
-    using NServiceBus;
-
-	public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
+    public class EndpointConfig : IConfigureThisEndpoint, AsA_Server
     {
-	    public void Customize(ConfigurationBuilder builder)
-        { }
+        public void Customize(ConfigurationBuilder builder)
+        {
+            Console.Title = "Binary";
+        }
     }
 
-    class SetSerializer : INeedInitialization
+    internal class SetSerializer : INeedInitialization
     {
         public void Init(Configure config)
         {
             config.UseSerialization<Binary>();
         }
     }
-        
-    class Sender : IWantToRunWhenBusStartsAndStops
+
+    internal class Sender : IWantToRunWhenBusStartsAndStops
     {
         public IBus Bus { get; set; }
 
@@ -27,7 +28,7 @@ namespace BinaryEndpoint
         {
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
-                Bus.Send(new Messages.MyName { Name = "binary" });
+                Bus.Send(new MyRequest {ContentType = "binary"});
             }
         }
 

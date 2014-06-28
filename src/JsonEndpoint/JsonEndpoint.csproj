@@ -50,8 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\BinaryEndpoint\HandleThankYou.cs">
-      <Link>HandleThankYou.cs</Link>
+    <Compile Include="..\BinaryEndpoint\HandleResponse.cs">
+      <Link>HandleResponse.cs</Link>
     </Compile>
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
